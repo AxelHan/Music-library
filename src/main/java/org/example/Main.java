@@ -18,12 +18,14 @@ public class Main {
         user2.addProjectToFavourites("Ballader och oförskämdheter", "Cornelis Vreeswijk", "Ballads", 13);
         user2.addProjectToFavourites("TIAMAI", "Duvchi", "Mellow Pop", 5);
 
+
         //Print Users
         System.out.println(user1);
         System.out.println(user2);
 
-        System.out.println(user2.getFavouriteProjects().get(0).getClass().getName());
-        System.out.println(user2.getFavouriteProjects().get(1).getClass().getName());
+
+
+        System.out.println(user1);
 
 
     }

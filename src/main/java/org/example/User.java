@@ -44,9 +44,22 @@ public class User {
         favouriteProjects.add(Project.createProject(title, artist, genre, numberOfSongs));
     }
 
-//    protected void removeProjectFromFavourites(String title, String artist, int numberOfSongs){
-//        favouriteProjects.remove(new Project(title, artist, numberOfSongs));
-//    }
+    protected void removeProjectFromFavourites(String title, String artist){
+
+        for(Project project: favouriteProjects){
+            if(project.getTitle().equalsIgnoreCase(title) && project.getArtist().equalsIgnoreCase(artist)){
+                favouriteProjects.remove(project);
+                System.out.println(title + "by: " + artist + " removed from favourites");
+                break;
+            }
+        }
+        System.out.println("There is no such project in the list");
+
+    }
+
+    protected void UpdateFavouriteGenre(){
+
+    }
 
     public String getName() {
         return this.name;
