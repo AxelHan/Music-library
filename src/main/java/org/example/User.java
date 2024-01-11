@@ -1,8 +1,7 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class User {
 
@@ -22,6 +21,7 @@ public class User {
 
     protected void addProjectToFavourites(String title, String artist, String genre, int numberOfSongs){
         favouriteProjects.add(Project.createProject(title, artist, genre, numberOfSongs));
+        updateFavouriteGenre();
     }
     protected void addProjectInteractivelyToFavourites(){
 
@@ -54,10 +54,33 @@ public class User {
             }
         }
         System.out.println("There is no such project in the list");
+        updateFavouriteGenre();
 
     }
 
-    protected void UpdateFavouriteGenre(){
+//    protected void updateFavouriteGenre(){
+//        Map.Entry<String, Long> result = favouriteProjects.stream()
+//                .collect(Collectors.groupingBy(Project::getGenre, Collectors.counting()))
+//                .entrySet().stream()
+//                .collect(Collectors.maxBy(Map.Entry.comparingByValue()))
+//                .orElse(null);
+//
+//        System.out.println(result.getKey());
+//    }
+
+    protected void updateFavouriteGenre(){
+
+        Map.Entry<Long, List<String>> result = favouriteProjects.stream()
+                .collect(Collectors.groupingBy(
+                        p -> favouriteProjects.stream().filter(p1 -> p1.getGenre().equals(p.getGenre())).count(),
+                        Collectors.mapping(Project::getGenre, Collectors.toList())
+                ))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByKey())
+                .orElse(null);
+
+        Set<String> uniqueGenres = new HashSet<>(result.getValue());
+        this.favouriteGenre = String.join(" & ", uniqueGenres);
 
     }
 

@@ -15,6 +15,7 @@ public class Main {
         //Add Projects
         user1.addProjectToFavourites("Whats the story (Morning glory)", "Oasis", "Rock", 12);
         user1.addProjectToFavourites("Känn ingen sorg för mig göteborg", "Håkan Hellström", "Pop", 10);
+
         user2.addProjectToFavourites("Ballader och oförskämdheter", "Cornelis Vreeswijk", "Ballads", 13);
         user2.addProjectToFavourites("TIAMAI", "Duvchi", "Mellow Pop", 5);
 
@@ -23,7 +24,7 @@ public class Main {
         System.out.println(user1);
         System.out.println(user2);
 
-
+        user1.addProjectToFavourites("Domedagsdrömmar", "Junior brielle", "Pop", 12);
 
         System.out.println(user1);
 
