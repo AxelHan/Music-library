@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class User {
 
@@ -10,15 +11,37 @@ public class User {
     private int userNumber;
     private String favouriteGenre;
     private ArrayList<Project> favouriteProjects = new ArrayList<>();
+    private Scanner sc;
 
     public User(String name, String favouriteGenre) {
         this.name = name;
         this.favouriteGenre = favouriteGenre;
         this.userNumber = ++ lastUserNumber;
+        this.sc = new Scanner(System.in);
     }
 
-    protected void addProjectToFavourites(String title, String artist, int numberOfSongs){
-        favouriteProjects.add(Project.createProject(title, artist, numberOfSongs));
+    protected void addProjectToFavourites(String title, String artist, String genre, int numberOfSongs){
+        favouriteProjects.add(Project.createProject(title, artist, genre, numberOfSongs));
+    }
+    protected void addProjectInteractivelyToFavourites(){
+
+        System.out.println("What is the title of the project?");
+
+        String title = sc.nextLine();
+
+        System.out.println("What is the name of the artist?");
+
+        String artist = sc.nextLine();
+
+        System.out.println("What genre is the project?");
+
+        String genre = sc.nextLine();
+
+        System.out.println("How many songs does the project consist of?");
+
+        int numberOfSongs = sc.nextInt();
+
+        favouriteProjects.add(Project.createProject(title, artist, genre, numberOfSongs));
     }
 
 //    protected void removeProjectFromFavourites(String title, String artist, int numberOfSongs){
@@ -42,11 +65,19 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", favouriteGenre='" + favouriteGenre + '\'' +
-                ", userNumber='" + userNumber + '\'' +
-                ", favouriteProjects=" + favouriteProjects.toString() +
-                '}';
+        String user = "";
+        user += "Name: " + this.name + "\n";
+        user += " User Number: " + this.userNumber + "\n";
+        user += " Favourite genre: " + this.favouriteGenre + "\n";
+        user +=  name + "s favourite projects are: ";
+        for (Project proj : this.favouriteProjects){
+            user += "The " +
+                    proj.getGenre() + " " +
+                    proj.getClass().getSimpleName().toLowerCase() + " " +
+                    proj.getTitle() + " by: " +
+                    proj.getArtist() + ", \n";
+        }
+
+        return user;
     }
 }
